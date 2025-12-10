@@ -136,7 +136,7 @@ def tage_ausgeben(ausgewaehlte_woche, text):
             print("Woche nicht gefunden oder Format stimmt nicht.")
 
 def tage_ausgeben(ausgewaehlte_woche, text):
-
+    print("Suche nach Woche:", text)
     # Muster: finde den Textabschnitt für die ausgewählte Woche + Ort
     pattern = re.compile(
         re.escape(ausgewaehlte_woche) + r"\n(Strasbourg|Brussels)\n(.*?)(?=\n(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ 2025 -|$)",
