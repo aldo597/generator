@@ -1,0 +1,134 @@
+== Info: Host generatorbackend-production-6bce.up.railway.app:443 was resolved.
+== Info: IPv6: (none)
+== Info: IPv4: 66.33.22.202
+== Info:   Trying 66.33.22.202:443...
+== Info: Connected to generatorbackend-production-6bce.up.railway.app (66.33.22.202) port 443
+== Info: ALPN: curl offers h2,http/1.1
+== Info: (304) (OUT), TLS handshake, Client hello (1):
+=> Send SSL data, 352 bytes (0x160)
+0000: ...\...c..._-...DI?.....9..X.N. 9..k.r . .2p.....2.s..;&..=.U...
+0040: b....T..b.............0.,.(.$.......k.9...........=.5...../.+.'.
+0080: #.......g.3...E...<./...A.......................+............3.&
+00c0: .$... 9..j.......w..-.sW$.$:(!.:..z..f...4.2../generatorbackend-
+0100: production-6bce.up.railway.app..................................
+0140: .....................h2.http/1.1
+== Info:  CAfile: /etc/ssl/cert.pem
+== Info:  CApath: none
+== Info: (304) (IN), TLS handshake, Server hello (2):
+<= Recv SSL data, 122 bytes (0x7a)
+0000: ...v...%..W..xs....hH.... .......vn.3. . .2p.....2.s..;&..=.U...
+0040: b....T.......+.....3.$... ..._....(.............w}W...Lu.C
+== Info: (304) (IN), TLS handshake, Unknown (8):
+<= Recv SSL data, 15 bytes (0xf)
+0000: .............h2
+== Info: (304) (IN), TLS handshake, Certificate (11):
+<= Recv SSL data, 2845 bytes (0xb1d)
+0000: ...........0...0...........y.c..Cw....(s....0...*.H........031.0
+0040: ...U....US1.0...U....Let's Encrypt1.0...U....R120...251206140646
+0080: Z..260306140645Z0.1.0...U....*.up.railway.app0.."0...*.H........
+00c0: .....0.........@lT.9UvA.h....x>..?\......,...k.K......m.....I...
+0100: P.&B.onTXv..[kl....Au..."..Z...Bv....l...P.+.8...<H..I....k.$..a
+0140: }a[.....&......T/.s. F1...f....-.....j....E.....Ku..-..Hz..8...$
+0180: g.79BP/.y...PzsA....`<.u..e{*m.M.=.V.D..G..#....E....R..'......O
+01c0: S...o....Q.....y[*......g&.{....N:.Q....z,....}f.K.c..l ....P..I
+0200: *...C1..F............d.f.PV.+X...x.....l.....bl[..r..'."..A..4..
+0240: y.C.......g...m.u^..V.....!......B...._...)R.P...........|.R....
+0280: .U.1y...r.8.....W..m.T.....C...6..+..8......Zd.a..y3..../A...<Qd
+02c0: <..4....2T............!0...0...U...........0...U.%..0...+.......
+0300: ..+.......0...U.......0.0...U........... ....<..[......0...U.#..
+0340: 0.....).-.o1..L.x>......03..+........'0%0#..+.....0...http://r12
+0380: .i.lencr.org/0...U....0...*.up.railway.app0...U. ..0.0...g.....0
+03c0: ...U...'0%0#.!....http://r12.c.lencr.org/78.crl0.....+.....y....
+0400: ........w.d..l............O(...5'......}.......2.......H0F.!..I.
+0440: ...{.Xf9..x[.i.'.....x+..'z}..!..l...U.<.qd....:..r.....7.]...On
+0480: .v...-...%...:.E....#..K..)'...3........2.......G0E.!..v.Dj.N...
+04c0: .[.;.j....q..j.......u. 9....N.!~....#.>...e..........y.0...*.H.
+0500: ............-w...w..i%....6M.XU..<......D.....r.......uC....[.V.
+0540: ..O..YNg.;...\...d.q.y.P..P...X...$S.]......b-......[...r>..mU..
+0580: ....Cc=3...0q#Ds...08...Q...V.....o.9...sw.,.....@...d..w.*.....
+05c0: ..........+........N....[...8....D.oq..&...8..c%_t.nX...TU.1..{A
+0600: @..}S...E.. .....0...0.............2Kp...q.@...&<0...*.H........
+0640: 0O1.0...U....US1)0'..U... Internet Security Research Group1.0...
+0680: U....ISRG Root X10...240313000000Z..270312235959Z031.0...U....US
+06c0: 1.0...U....Let's Encrypt1.0...U....R120.."0...*.H.............0.
+0700: .........(t....;....Ku.,.....2~6...1..........Q=L.(n.U1.."]r.-..
+0740: M@<..#.x7..e24..q.....[.........s.m........Ea.5=...._j.......*..
+0780: *....q.;t.<..`.ZKN...*s\.ae...<..No....F...M*c..f...p.Peo;t.H...
+07c0: X]-#.^..........M..z.'....-........79...,A.....!.Y...:|.\..b..(.
+0800: ..<............0..0...U...........0...U.%..0...+.........+......
+0840: .0...U.......0.......0...U........).-.o1..L.x>......0...U.#..0..
+0880: .y.Y.{....s.....X...n02..+........&0$0"..+.....0...http://x1.i.l
+08c0: encr.org/0...U. ..0.0...g.....0'..U... 0.0.......http://x1.c.len
+0900: cr.org/0...*.H..............u...jvHe2...D..v......v.....n..V...K
+0940: ....xH.u...F{.`+ .....E.j.R........_.mF.RP.@...}..X.......c.f..w
+0980: ;...&..@......W.\qA.0 ....KP(..............~t@..Z.O\......Y..yn#
+09c0: M.....)j\...B...Nd {..1..h.G...x..NJ.i$*K7{Q.k:?R.....XN..._o.1I
+0a00: H..?... =.......8#.q.@...F4.jN...c_.i.G..".KH..uT......S.{.6M...
+0a40: ..J.3<.i......._.T.M.....Z..z6.$..XR..5.^-.t.b&...1).....b.h.w..
+0a80: ...Y..fK.P.......`M.KaO. ..H.1......w.......F...K.......6i?.hKt.
+0ac0: ..P.jz...H..}]a...f.u..^...c.#.P....u7>u...%(.!N..:......_.Q.F..
+0b00: .....W.........n....N..|.v;..
+== Info: (304) (IN), TLS handshake, CERT verify (15):
+<= Recv SSL data, 520 bytes (0x208)
+0000: ...........@d....u>n.'...z.&...2.T....,0rj....$.&..s.%...k..o...
+0040: ....g.,.o...5Z.....` A$S.0....u.l....._px1....6.]uQ....ato....R[
+0080: ..X.?.K.....L79.f.\..=..7.a8."....O.,.-p..j.~%....".2@..8..../.D
+00c0: ....;?.O!h+<../..e@.;.......dI.H a.+..n...]p.unL...gn...]m.i...,
+0100: A.%...:.....#.W.)......Z...Hs2.......&2.fC=....c#X.~......Q....0
+0140: ..$..R.]Q...f....c....}.H...s..._T\U.\........]&.u..\...}...J..)
+0180: ...C.......b..d..g............0..a.x...4.......xu..*2]...!.`....
+01c0: ..u.f...A+@....)s....g...$.<......R..QE.O.Sb.+sP......]..l.T...m
+0200: ........
+== Info: (304) (IN), TLS handshake, Finished (20):
+<= Recv SSL data, 36 bytes (0x24)
+0000: ... .z...r...^.UWw@6z..M.j..k....U..
+== Info: (304) (OUT), TLS handshake, Finished (20):
+=> Send SSL data, 36 bytes (0x24)
+0000: ... ......<...B%?h...<........]...+y
+== Info: SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256 / [blank] / UNDEF
+== Info: ALPN: server accepted h2
+== Info: Server certificate:
+== Info:  subject: CN=*.up.railway.app
+== Info:  start date: Dec  6 14:06:46 2025 GMT
+== Info:  expire date: Mar  6 14:06:45 2026 GMT
+== Info:  subjectAltName: host "generatorbackend-production-6bce.up.railway.app" matched cert's "*.up.railway.app"
+== Info:  issuer: C=US; O=Let's Encrypt; CN=R12
+== Info:  SSL certificate verify ok.
+== Info: using HTTP/2
+== Info: [HTTP/2] [1] OPENED stream for https://generatorbackend-production-6bce.up.railway.app/wochen
+== Info: [HTTP/2] [1] [:method: GET]
+== Info: [HTTP/2] [1] [:scheme: https]
+== Info: [HTTP/2] [1] [:authority: generatorbackend-production-6bce.up.railway.app]
+== Info: [HTTP/2] [1] [:path: /wochen]
+== Info: [HTTP/2] [1] [user-agent: curl/8.7.1]
+== Info: [HTTP/2] [1] [accept: */*]
+=> Send header, 114 bytes (0x72)
+0000: GET /wochen HTTP/2
+0014: Host: generatorbackend-production-6bce.up.railway.app
+004b: User-Agent: curl/8.7.1
+0063: Accept: */*
+0070: 
+== Info: Request completely sent off
+<= Recv header, 13 bytes (0xd)
+0000: HTTP/2 502 
+<= Recv header, 32 bytes (0x20)
+0000: content-type: application/json
+<= Recv header, 22 bytes (0x16)
+0000: server: railway-edge
+<= Recv header, 46 bytes (0x2e)
+0000: x-railway-edge: railway/europe-west4-drams3a
+<= Recv header, 26 bytes (0x1a)
+0000: x-railway-fallback: true
+<= Recv header, 46 bytes (0x2e)
+0000: x-railway-request-id: VnF1yDrSQFG9kHMmN8N_Fg
+<= Recv header, 21 bytes (0x15)
+0000: content-length: 109
+<= Recv header, 37 bytes (0x25)
+0000: date: Wed, 10 Dec 2025 15:43:04 GMT
+<= Recv header, 2 bytes (0x2)
+0000: 
+<= Recv data, 109 bytes (0x6d)
+0000: {"status":"error","code":502,"message":"Application failed to re
+0040: spond","request_id":"VnF1yDrSQFG9kHMmN8N_Fg"}
+<= Recv data, 0 bytes (0x0)
+== Info: Connection #0 to host generatorbackend-production-6bce.up.railway.app left intact
