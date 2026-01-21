@@ -108,7 +108,7 @@ def get_weeks_from_text(text):
 
     # Regulärer Ausdruck, um Woche + Ort zu erfassen
     pattern = re.compile(
-        r"((?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ 2025 - (?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ 2025)\n(Strasbourg|Brussels)"
+        r"((?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4} - (?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4})\n(Strasbourg|Brussels)"
     )
 
     # Alle passenden Tupel extrahieren: (Woche, Ort)
@@ -139,7 +139,7 @@ def tage_ausgeben(ausgewaehlte_woche, text):
     print("Suche nach Woche:", text)
     # Muster: finde den Textabschnitt für die ausgewählte Woche + Ort
     pattern = re.compile(
-        re.escape(ausgewaehlte_woche) + r"\n(Strasbourg|Brussels)\n(.*?)(?=\n(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ 2025 -|$)",
+        re.escape(ausgewaehlte_woche) + r"\n(Strasbourg|Brussels)\n(.*?)(?=\n(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4} -|$)",
         re.DOTALL
     )
 
@@ -149,10 +149,10 @@ def tage_ausgeben(ausgewaehlte_woche, text):
         wocheninhalt = match.group(2)  # Textblock dieser Woche
 
         # Alle Einzeltage mit Datum (z.B. "Thursday, 13 March 2025") finden
-        tage = re.findall(r"(Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ 2025", wocheninhalt)
+        tage = re.findall(r"(Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4}", wocheninhalt)
         
         # Das vorherige findall gibt nur die Wochentage zurück, wir ändern die Regex:
-        tage_mit_datum = re.findall(r"(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ 2025", wocheninhalt)
+        tage_mit_datum = re.findall(r"(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4}", wocheninhalt)
 
         return tage_mit_datum
     else:
