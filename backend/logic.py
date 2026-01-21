@@ -152,7 +152,7 @@ def tage_ausgeben(ausgewaehlte_woche, text):
         tage = re.findall(r"(Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4}", wocheninhalt)
         
         # Das vorherige findall gibt nur die Wochentage zurück, wir ändern die Regex:
-        tage_mit_datum = re.findall(r"(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ \d{4}", wocheninhalt)
+        tage_mit_datum = re.findall(r"(?:Monday|Tuesday|Wednesday|Thursday|Friday), \d{1,2} \w+ ", wocheninhalt)
 
         return tage_mit_datum
     else:
