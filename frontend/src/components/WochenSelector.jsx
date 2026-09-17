@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
 
 function WochenSelector({ wochen, onSelect }) {
-  const [selectedWeek, setSelectedWeek] = useState('');
+  const [selectedWeek, setSelectedWeek] = useState(null);
 
-  const handleChange = (event) => {
-    const week = event.target.value;
-    setSelectedWeek(week);
-    onSelect(week);
+  const handleSelect = (weekId) => {
+    setSelectedWeek(weekId);
+    onSelect(weekId);
   };
 
   return (
     <div>
-      <h2>Choose week:</h2>
-      <form>
-        {wochen.map(w => (
-          <label key={w[0]} style={{ display: 'block', marginBottom: '8px' }}>
-            <input
-              type="radio"
-              name="week"
-              value={w[0]}
-              checked={selectedWeek === w[0]}
-              onChange={handleChange}
-              
-            />
-            {w[0]}
-          </label>
+      <h2>1. Sitzungswoche auswählen:</h2>
+
+      <div className="week-options">
+        {wochen.map((woche) => (
+          <div
+            key={woche.id}
+            className={`week-item ${
+              selectedWeek === woche.id ? 'selected' : ''
+            }`}
+            onClick={() => handleSelect(woche.id)}
+          >
+            {woche.woche}
+          </div>
         ))}
-      </form>
+      </div>
     </div>
   );
 }
 
 export default WochenSelector;
-

@@ -1,52 +1,84 @@
 import React, { useState } from 'react';
 
-function PunkteSelector({ punkte, onPunktSelect }) {
+function PunkteSelector({
+  punkte,
+  selectedPunkt,
+  onPunktSelect
+}) {
   const [expandedTitles, setExpandedTitles] = useState({});
-  const [selectedPunkt, setSelectedPunkt] = useState(null);
 
-  const toggleExpand = (titel) => {
+  const toggleExpand = (dlvId) => {
     setExpandedTitles(prev => ({
       ...prev,
-      [titel]: !prev[titel],
+      [dlvId]: !prev[dlvId],
     }));
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSelectedPunkt(value);
-    onPunktSelect(value); // Nur Auswahl, kein Bild erzeugen
   };
 
   return (
     <div>
-      <h2>Choose vote:</h2>
-      {punkte.map(([titel, unterpunkte]) => (
-        <div key={titel}>
-          <h4
-            onClick={() => toggleExpand(titel)}
-            style={{ cursor: 'pointer', userSelect: 'none' }}
-          >
-            {titel} {expandedTitles[titel] ? '▼' : '▶'}
-          </h4>
+      <h2>3. Abstimmung auswählen:</h2>
 
-          {expandedTitles[titel] && (
-            <div style={{ paddingLeft: 20 }}>
-              {unterpunkte.map((p, i) => (
-                <label key={i} style={{ display: 'block', cursor: 'pointer' }}>
-                  <input
-                    type="radio"
-                    name="punkte"
-                    value={p}
-                    checked={selectedPunkt === p}
-                    onChange={handleChange}
-                  />
-                  {p}
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+      <div className="vote-options">
+        {punkte.map((punkt, index) => (
+          <div
+            className="punkt-container"
+            key={punkt.dlv_id}
+          >
+            {/* Hauptthema */}
+            <h4
+              className="punkt-title"
+              onClick={() => toggleExpand(punkt.dlv_id)}
+            >
+              <span
+                className={`vote-number ${
+                  expandedTitles[punkt.dlv_id] ? 'expanded' : ''
+                }`}
+              >
+                {index + 1}.
+              </span>
+
+              <span
+                className={`toggle-arrow ${
+                  expandedTitles[punkt.dlv_id] ? 'expanded' : ''
+                }`}
+              >
+                {expandedTitles[punkt.dlv_id] ? '▼' : '▶'}
+              </span>
+
+              {punkt.titel}
+            </h4>
+
+            {/* Unterabstimmungen */}
+            {expandedTitles[punkt.dlv_id] && (
+              <div className="sub-votes">
+
+                {punkt.unterabstimmungen?.length > 0 ? (
+                  punkt.unterabstimmungen.map((unterabstimmung) => (
+                    <div
+                      key={unterabstimmung.identifier}
+                      className={`sub-vote ${
+                        selectedPunkt === unterabstimmung.identifier
+                          ? 'selected'
+                          : ''
+                      }`}
+                      onClick={() =>
+                        onPunktSelect(unterabstimmung.identifier)
+                      }
+                    >
+                      {unterabstimmung.titel}
+                    </div>
+                  ))
+                ) : (
+                  <div className="sub-vote-empty">
+                    Keine Unterabstimmungen vorhanden.
+                  </div>
+                )}
+
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
