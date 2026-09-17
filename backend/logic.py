@@ -18,8 +18,17 @@ PADDING = 12
 LINE_HEIGHT = 35
 ICON_SIZE = 32
 REC_SIZE = 10
-FONT_PATH = "PTSansProCondRg.OTF"  # oder "arial.ttf"
-FONT2 = "PTSansProXBd.OTF"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FONT_PATH = os.path.join(
+    BASE_DIR,
+    "PTSansProCondRg.OTF"
+)
+
+FONT2 = os.path.join(
+    BASE_DIR,
+    "PTSansProXBd.OTF"
+)
+
 FONT_SIZE = 28
 FONT_SIZE2 = 42
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Pfad zum backend-Ordner
