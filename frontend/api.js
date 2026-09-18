@@ -7,7 +7,7 @@ const BASE = "https://generatorbackend-production-5575.up.railway.app/";
 
 const api = axios.create({
   baseURL: BASE,
-  timeout: 30000,
+  timeout: 60000,
 });
 
 export default api;
