@@ -661,29 +661,104 @@ def übersetze_keys(abstimmungs_dict):
         key_mapping.get(k, k): v for k, v in abstimmungs_dict.items()
     }
 
+
 async def parse_rcv_inhaltsverzeichnis(url: str, date: str):
-    ###
-    async with httpx.AsyncClient(timeout=60) as client:
+    import time
+
+    start = time.perf_counter()
+
+    print(f"\n--- START /punkte {date} ---")
+
+    # =========================================================
+    # 1. RCV-XML laden
+    # =========================================================
+
+    t = time.perf_counter()
+    print("1. Lade RCV-XML...")
+
+    async with httpx.AsyncClient(timeout=20) as client:
         response = await client.get(url)
         response.raise_for_status()
 
-    root = ET.fromstring(response.text)
+    print(f"   RCV-XML fertig: {time.perf_counter() - t:.2f}s")
+
+    root = ET.fromstring(response.content)
+
+    abstimmungen = OrderedDict()
+    
+    for result in root.iter("RollCallVote.Result"):
+
+        dlv_id = result.attrib.get("DlvId")
+        identifier = result.attrib.get("Identifier")
+        result_date = result.attrib.get("Date")
+    
+        description = result.findtext(
+            "RollCallVote.Description.Text",
+            default=""
+        ).strip()
+    
+        if not dlv_id or not description:
+            continue
+    
+        # Titel des übergeordneten Abstimmungsobjekts
+        titel = description.split(" – ")[0].strip()
+    
+        if dlv_id not in abstimmungen:
+            abstimmungen[dlv_id] = {
+                "titel": titel,
+                "dlv_id": dlv_id,
+                "unterabstimmungen": []
+            }
+    
+        abstimmungen[dlv_id]["unterabstimmungen"].append({
+            "titel": description,
+            "identifier": identifier,
+            "date": result_date
+        })
+
+    return list(abstimmungen.values())
+
+async def parse_rcv_inhaltsverzeichnis_alt(url: str, date: str):
+    import time
+
+    start = time.perf_counter()
+
+    print(f"\n--- START /punkte {date} ---")
 
     # =========================================================
-    # 2. Vote-Results des Tages aus der API laden
+    # 1. RCV-XML laden
+    # =========================================================
+
+    t = time.perf_counter()
+    print("1. Lade RCV-XML...")
+
+    async with httpx.AsyncClient(timeout=20) as client:
+        response = await client.get(url)
+        response.raise_for_status()
+
+    print(f"   RCV-XML fertig: {time.perf_counter() - t:.2f}s")
+
+    root = ET.fromstring(response.content)
+
+    # =========================================================
+    # 2. Vote-Results laden
     # =========================================================
 
     sitting_id = f"MTG-PL-{date}"
 
-    async with httpx.AsyncClient(timeout=60) as client:
+    t = time.perf_counter()
+    print("2. Lade vote-results...")
+
+    async with httpx.AsyncClient(timeout=20) as client:
         response = await client.get(
             f"{BASE_URL}/meetings/{sitting_id}/vote-results",
             headers={
                 "Accept": "application/ld+json"
             }
         )
-
         response.raise_for_status()
+
+    print(f"   vote-results fertig: {time.perf_counter() - t:.2f}s")
 
     vote_results = response.json()["data"]
 
@@ -717,10 +792,6 @@ async def parse_rcv_inhaltsverzeichnis(url: str, date: str):
         if not dlv_id or not description:
             continue
 
-        # -----------------------------------------------------
-        # Abstimmungsobjekt erstmalig anlegen
-        # -----------------------------------------------------
-
         if dlv_id not in abstimmungen:
 
             api_vote = vote_by_dlv_id.get(dlv_id)
@@ -730,10 +801,8 @@ async def parse_rcv_inhaltsverzeichnis(url: str, date: str):
             dokument_id = None
 
             if api_vote:
-
                 vote_id = api_vote.get("activity_id")
 
-                # Zugehöriges Dokument
                 references = api_vote.get(
                     "based_on_a_realization_of",
                     []
@@ -742,16 +811,11 @@ async def parse_rcv_inhaltsverzeichnis(url: str, date: str):
                 if references:
                     dokument_id = references[0].split("/")[-1]
 
-                # Titel des übergeordneten Abstimmungsobjekts
-                #
-                # Wir verwenden dafür den activity_label
-                # des Vote-Results, NICHT den RCV-Description-Text.
                 titel = (
                     api_vote.get("activity_label", {})
                     .get("de")
                 )
 
-            # Fallback, falls API keinen Titel liefert
             if not titel:
                 titel = description.split(" – ")[0].strip()
 
@@ -763,19 +827,16 @@ async def parse_rcv_inhaltsverzeichnis(url: str, date: str):
                 "unterabstimmungen": []
             }
 
-        # -----------------------------------------------------
-        # Unterabstimmung hinzufügen
-        # -----------------------------------------------------
-
         abstimmungen[dlv_id]["unterabstimmungen"].append({
             "titel": description,
             "identifier": identifier,
             "date": result_date
         })
 
-    # =========================================================
-    # 5. Liste zurückgeben
-    # =========================================================
+    print(
+        f"--- ENDE /punkte: "
+        f"{time.perf_counter() - start:.2f}s ---"
+    )
 
     return list(abstimmungen.values())
 
